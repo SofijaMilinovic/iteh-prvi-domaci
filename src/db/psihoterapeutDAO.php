@@ -1,7 +1,7 @@
 <?php
 
-include "dbBroker.php";
-include($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/psihoterapeut.php");
+include_once "dbBroker.php";
+include_once($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/psihoterapeut.php");
 
 class PsihoterapeutDAO {
 
@@ -12,10 +12,27 @@ class PsihoterapeutDAO {
     private $kolonaIme = "ime";
     private $kolonaPrezime = "prezime";
 
-    public function pronadjiPsihoterapeuta($username, $password) {
+    public function pronadjiPsihoterapeutaSaUsernamePassword($username, $password) {
         $query = "SELECT * FROM $this->nazivTabele WHERE $this->kolonaUsername = '$username' AND $this->kolonaPassword = '$password'";
         $connection = DBBroker::getConnection();
-        $psihoterapeut;
+        if ($rezultujucaTabela = $connection->query($query)) {
+            $red = $rezultujucaTabela->fetch_array(1);
+            if ($red != null) {
+                return new Psihoterapeut(
+                    $red[$this->kolonaPsihoterapeutId],
+                    $red[$this->kolonaUsername],
+                    $red[$this->kolonaPassword],
+                    $red[$this->kolonaIme],
+                    $red[$this->kolonaPrezime],
+                );
+            }
+        }
+        return null;
+    }
+
+    public function pronadjiPsihoterapeuta($psihoterapeutId) {
+        $query = "SELECT * FROM $this->nazivTabele WHERE $this->kolonaPsihoterapeutId = '$psihoterapeutId'";
+        $connection = DBBroker::getConnection();
         if ($rezultujucaTabela = $connection->query($query)) {
             $red = $rezultujucaTabela->fetch_array(1);
             if ($red != null) {
