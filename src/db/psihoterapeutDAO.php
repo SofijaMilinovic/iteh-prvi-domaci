@@ -6,6 +6,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/psihoterap
 class PsihoterapeutDAO {
 
     private $nazivTabele = "psihoterapeut";
+    private $kolonaPsihoterapeutId = "psihoterapeutId";
     private $kolonaUsername = "username";
     private $kolonaPassword = "password";
     private $kolonaIme = "ime";
@@ -19,11 +20,11 @@ class PsihoterapeutDAO {
             $red = $rezultujucaTabela->fetch_array(1);
             if ($red != null) {
                 return new Psihoterapeut(
-                    $red["psihoterapeutId"],
-                    $red["username"],
-                    $red["password"],
-                    $red["ime"],
-                    $red["prezime"]
+                    $red[$this->kolonaPsihoterapeutId],
+                    $red[$this->kolonaUsername],
+                    $red[$this->kolonaPassword],
+                    $red[$this->kolonaIme],
+                    $red[$this->kolonaPrezime],
                 );
             }
         }
