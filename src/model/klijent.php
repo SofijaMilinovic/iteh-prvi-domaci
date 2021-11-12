@@ -2,14 +2,14 @@
 
 class Klijent {
 
-    public $klijentId;
+    public $jmbg;
     public $ime;
     public $prezime;
     public $datumRodjenja;
     
-    public function __construct($klijentId=null, $ime=null, $prezime=null, $datumRodjenja=null)
+    public function __construct($jmbg=null, $ime=null, $prezime=null, $datumRodjenja=null)
     {
-        $this->klijentId = $klijentId;
+        $this->jmbg = $jmbg;
         $this->ime = $ime;
         $this->prezime = $prezime;
         $this->datumRodjenja = $datumRodjenja;
