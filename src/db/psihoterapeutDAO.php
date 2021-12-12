@@ -1,7 +1,7 @@
 <?php
 
 include_once "dbBroker.php";
-include_once($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/psihoterapeut.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/iteh-prvi-domaci/src/model/psihoterapeut.php");
 
 class PsihoterapeutDAO {
 
@@ -61,7 +61,6 @@ class PsihoterapeutDAO {
     private function psihoterapeutSaUsernameomVecPostoji($username) {
         $query = "SELECT * FROM $this->nazivTabele WHERE $this->kolonaUsername = '$username'";
         $connection = DBBroker::getConnection();
-        $psihoterapeut;
         if ($rezultujucaTabela = $connection->query($query)) {
             $red = $rezultujucaTabela->fetch_array(1);
             return $red != null;

@@ -1,7 +1,7 @@
 <?php
 
 include_once "dbBroker.php";
-include_once($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/klijent.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/iteh-prvi-domaci/src/model/klijent.php");
 
 class KlijentDAO {
 

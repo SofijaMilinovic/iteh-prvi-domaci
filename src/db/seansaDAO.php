@@ -2,7 +2,7 @@
 
 include_once "klijentDAO.php";
 include_once "psihoterapeutDAO.php";
-include_once($_SERVER['DOCUMENT_ROOT'] . "/ITEH/iteh-prvi-domaci/src/model/seansa.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/iteh-prvi-domaci/src/model/seansa.php");
 
 class SeansaDAO {
 
