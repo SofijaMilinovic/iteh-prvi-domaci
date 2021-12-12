@@ -65,16 +65,52 @@ $_POST = array();
                     </div>
                 <?php endif; ?>
 
-                <form method="POST" action="#">
-                    <label class="ime">Ime</label>
-                    <input type="text" name="ime" class="form-control" required>
-                    <label class="prezime">Prezime</label>
-                    <input type="text" name="prezime" class="form-control" required>
-                    <label class="username">Korisnicko ime</label>
-                    <input type="text" name="username" class="form-control" required>
+                <form id="form" method="POST" action="#">
+                    <label for="ime">Ime</label>
+                    <input id="inputIme" type="text" name="ime" class="form-control">
+                    <div id="greskaImeAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div id="greskaImeText">
+                            <!-- js generated -->
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <label for="prezime">Prezime</label>
+                    <input id="inputPrezime" type="text" name="prezime" class="form-control">
+                    <div id="greskaPrezimeAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div id="greskaPrezimeText">
+                            <!-- js generated -->
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <label for="username">Korisnicko ime</label>
+                    <input id="inputUsername" type="text" name="username" class="form-control">
+                    <div id="greskaUsernameAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div id="greskaUsernameText">
+                            <!-- js generated -->
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
                     <label for="password">Lozinka</label>
-                    <input type="password" name="password" class="form-control" required>
-                    <button type="submit" class="btn btn-primary" name="submit">Registruj se</button>
+                    <input id="inputPassword" type="password" name="password" class="form-control">
+                    <div id="greskaPasswordAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div id="greskaPasswordText">
+                            <!-- js generated -->
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <button id="btnRegister" class="btn btn-primary">Registruj se</button>
                 </form>
             </div>
         </div>
@@ -83,6 +119,7 @@ $_POST = array();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/registracija.js"></script>
 
 </body>
 

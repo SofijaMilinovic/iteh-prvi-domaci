@@ -21,7 +21,7 @@ class PsihoterapeutDAO {
                 return new Psihoterapeut(
                     $red[$this->kolonaPsihoterapeutId],
                     $red[$this->kolonaUsername],
-                    $red[$this->kolonaPassword],
+                    "",
                     $red[$this->kolonaIme],
                     $red[$this->kolonaPrezime],
                 );

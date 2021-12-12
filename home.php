@@ -5,6 +5,7 @@ include_once "src/model/psihoterapeut.php";
 session_start();
 
 $prijava = false;
+$seansaUbacena = false;
 $psihoterapeut = $_SESSION['psihoterapeut'];
 
 if (!isset($psihoterapeut)) {
@@ -15,6 +16,11 @@ if (!isset($psihoterapeut)) {
 if (isset($_SESSION['prijava'])) {
     $prijava = true;
     unset($_SESSION['prijava']);
+}
+
+if (isset($_SESSION['seansaUbacena'])) {
+    $seansaUbacena = true;
+    unset($_SESSION['seansaUbacena']);
 }
 
 ?>
@@ -51,8 +57,55 @@ if (isset($_SESSION['prijava'])) {
                             </button>
                         </div>
                     <?php endif; ?>
+
+                    <?php if ($seansaUbacena) : ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            "Seansa je uspesno ubacena!"
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container tabela">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <a class="btn btn-primary" href="./seansa.php">Ubaci novu seansu</a>
         </div>
     </div>
 
