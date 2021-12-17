@@ -23,6 +23,7 @@ if (isset($_POST['izmena'])) {
     $vreme = $_POST['vreme'];
     $trajanjeMin = $_POST['trajanjeMin'];
     $beleske = $_POST['beleske'];
+    unset($_POST['izmena']);
 }
 
 if (isset($_POST['klijent']) && isset($_POST['vreme']) && isset($_POST['trajanjeMin']) && isset($_POST['beleske'])) {
@@ -37,18 +38,15 @@ if (isset($_POST['klijent']) && isset($_POST['vreme']) && isset($_POST['trajanje
     $klijent = $klijentDAO->pronadjiKlijenta($klijentJmbg);
     $psihoterapeut = $_SESSION['psihoterapeut'];
 
-    $seansaId = null;
-    if ($mod == "izmeni") {
-        $seansaId = $_POST['seansaId'];
-    }
+    $seansaId = $_POST['seansaId'];
     $seansa = new Seansa($seansaId, $datum, $vreme, $trajanjeMin, $beleske, $klijent, $psihoterapeut);
     $seansaDAO = new SeansaDAO();
 
-    if ($mod == "ubaci") {
-        $rezultat = $seansaDAO->ubaciNovuSeansu($seansa);
+    if ($seansaId) {
+        $rezultat = $seansaDAO->izmeniSeansu($seansa);
         $_SESSION['rezultat'] = $rezultat;
     } else {
-        $rezultat = $seansaDAO->izmeniSeansu($seansa);
+        $rezultat = $seansaDAO->ubaciNovuSeansu($seansa);
         $_SESSION['rezultat'] = $rezultat;
     }
 }
@@ -56,10 +54,10 @@ if (isset($_POST['klijent']) && isset($_POST['vreme']) && isset($_POST['trajanje
 if (isset($_SESSION['rezultat'])) {
     $rezultat = $_SESSION['rezultat'];
     if ($rezultat == 1) {
-        if ($mod == "ubaci") {
-            $_SESSION['seansaUbacena'] = true;
-        } else {
+        if ($seansaId) {
             $_SESSION['seansaIzmenjena'] = true;
+        } else {
+            $_SESSION['seansaUbacena'] = true;
         }
         header('Location: home.php');
         unset($_SESSION['rezultat']);
