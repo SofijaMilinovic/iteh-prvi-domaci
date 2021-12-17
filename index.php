@@ -68,9 +68,9 @@ if (isset($_SESSION['registracija'])) {
 
                 <form method="POST" action="#">
                     <label class="username">Korisnicko ime</label>
-                    <input type="text" name="username" class="form-control" required>
+                    <input type="text" name="username" class="form-control" required value="pera@gmail.com">
                     <label for="password">Lozinka</label>
-                    <input type="password" name="password" class="form-control" required>
+                    <input type="password" name="password" class="form-control" required value="Pera123">
                     <button type="submit" class="btn btn-primary" name="submit">Prijavi se</button>
                     <a class="btn btn-primary" name="register" href="./registracija.php">Registruj se</a>
                 </form>

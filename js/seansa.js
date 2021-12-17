@@ -1,6 +1,7 @@
 // *** ELEMENTI START ***
 
 var $klijenti = $("#selectKlijenti");
+var $izabraniKlijent = $("#izabraniKlijent");
 
 // *** ELEMENTI END ***
 
@@ -8,10 +9,14 @@ var $klijenti = $("#selectKlijenti");
 
 function populisiKlijente(klijentiJSON) {
 
-    var selected = "selected";
+    var izabraniKlijentJmbg = $izabraniKlijent.attr("klijentJmbg");
+    var selected = "";
     var selectHtml = "";
     for (const klijent of klijentiJSON) {
         var datumRodjenja = klijent.datumRodjenja.replaceAll("-", ".");
+        if (klijent.jmbg == izabraniKlijentJmbg) {
+            selected = "selected";
+        }
         selectHtml += `<option ${selected}>${klijent.jmbg} - ${klijent.ime} ${klijent.prezime} - ${datumRodjenja}</option>`
         selected = ""
     }

@@ -3,16 +3,33 @@
 require_once "src/db/seansaDAO.php";
 require_once "src/db/klijentDAO.php";
 require_once "src/model/seansa.php";
+include_once "src/model/psihoterapeut.php";
 
 session_start();
-
+$psihoterapeut = $_SESSION['psihoterapeut'];
 $greska = null;
+$mod = "ubaci";
+
+$seansaId = "";
+$klijentJmbg = "";
+$vreme = "";
+$trajanjeMin = "";
+$beleske = "";
+
+if (isset($_POST['izmena'])) {
+    $mod = "izmeni";
+    $seansaId = $_POST['seansaId'];
+    $klijentJmbg = $_POST['klijentJmbg'];
+    $vreme = $_POST['vreme'];
+    $trajanjeMin = $_POST['trajanjeMin'];
+    $beleske = $_POST['beleske'];
+}
 
 if (isset($_POST['klijent']) && isset($_POST['vreme']) && isset($_POST['trajanjeMin']) && isset($_POST['beleske'])) {
 
     $klijentDAO = new KlijentDAO();
-    $klijentJmbg = substr($_POST['klijent'], 0, 13);
 
+    $klijentJmbg = substr($_POST['klijent'], 0, 13);
     $datum = date('y-m-d', time());
     $vreme = $_POST['vreme'];
     $trajanjeMin = $_POST['trajanjeMin'];
@@ -20,24 +37,35 @@ if (isset($_POST['klijent']) && isset($_POST['vreme']) && isset($_POST['trajanje
     $klijent = $klijentDAO->pronadjiKlijenta($klijentJmbg);
     $psihoterapeut = $_SESSION['psihoterapeut'];
 
-    $seansa = new Seansa(null, $datum, $vreme, $trajanjeMin, $beleske, $klijent, $psihoterapeut);
-    var_dump($seansa);
-
+    $seansaId = null;
+    if ($mod == "izmeni") {
+        $seansaId = $_POST['seansaId'];
+    }
+    $seansa = new Seansa($seansaId, $datum, $vreme, $trajanjeMin, $beleske, $klijent, $psihoterapeut);
     $seansaDAO = new SeansaDAO();
-    $rezultat = $seansaDAO->ubaciNovuSeansu($seansa);
-    $_SESSION['rezultat'] = $rezultat;
 
+    if ($mod == "ubaci") {
+        $rezultat = $seansaDAO->ubaciNovuSeansu($seansa);
+        $_SESSION['rezultat'] = $rezultat;
+    } else {
+        $rezultat = $seansaDAO->izmeniSeansu($seansa);
+        $_SESSION['rezultat'] = $rezultat;
+    }
 }
 
 if (isset($_SESSION['rezultat'])) {
     $rezultat = $_SESSION['rezultat'];
     if ($rezultat == 1) {
-        $_SESSION['seansaUbacena'] = true;
+        if ($mod == "ubaci") {
+            $_SESSION['seansaUbacena'] = true;
+        } else {
+            $_SESSION['seansaIzmenjena'] = true;
+        }
         header('Location: home.php');
         unset($_SESSION['rezultat']);
         exit();
     } else {
-        $greska = "Seansa nije ubacena, greska u sistemu!";
+        $greska = "Neuspesna operacija, greska u sistemu!";
     }
     unset($_SESSION['rezultat']);
 }
@@ -59,6 +87,18 @@ $_POST = array();
 
 <body>
 
+    <div class="navigacija">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="psihoterapeut" class="navigacija-text" psihoterapeutId="<?= $psihoterapeut->psihoterapeutId ?>">
+                        <?= $psihoterapeut->ime ?> <?= $psihoterapeut->prezime ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="outer">
         <div class="middle">
             <div class="inner">
@@ -73,22 +113,31 @@ $_POST = array();
                 <?php endif; ?>
 
                 <form id="form" method="POST" action="#">
+                    <label for="seansaId" hidden>Seansa id</label>
+                    <input type="number" name="seansaId" class="form-control" hidden value="<?= $seansaId ?>">
+
                     <label for="klijent">Klijent</label>
+                    <div id="izabraniKlijent" klijentJmbg="<?= $klijentJmbg ?>" hidden></div>
                     <select id="selectKlijenti" class="form-select" name="klijent" style="margin-left: 30px; margin-bottom: 30px;">
                         <!-- js generated -->
                     </select>
                     <br>
 
-                    <label for="vreme">Vreme</label>
-                    <input type="text" name="vreme" class="form-control" required>
+                    <label for="vreme">Vreme (h)</label>
+                    <input type="text" name="vreme" class="form-control" required value="<?= $vreme ?>">
 
                     <label for="trajanjeMin">Trajanje (min)</label>
-                    <input type="number" name="trajanjeMin" class="form-control" min=0 required>
+                    <input type="number" name="trajanjeMin" class="form-control" min=0 required value="<?= $trajanjeMin ?>">
 
                     <label for="beleske">Beleske</label>
-                    <textarea type="text" name="beleske" class="form-control" rows=5 required></textarea>
+                    <textarea type="text" name="beleske" class="form-control" rows=5 required><?= $beleske ?></textarea>
 
-                    <button id="btnUbaciSeansu" class="btn btn-primary">Ubaci seansu</button>
+                    <?php if ($mod == "ubaci") : ?>
+                        <button id="btnUbaciSeansu" class="btn btn-primary">Ubaci seansu</button>
+                    <?php endif; ?>
+                    <?php if ($mod == "izmeni") : ?>
+                        <button id="btnIzmeniSeansu" class="btn btn-primary">Izmeni seansu</button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

@@ -27,3 +27,16 @@
 .alert {
     margin-top: 5px;
 }
+
+.navigacija {
+    position: sticky; top: 0;
+    background-color: whitesmoke;
+    height: 60px;
+}
+
+.navigacija-text {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 5px;
+}

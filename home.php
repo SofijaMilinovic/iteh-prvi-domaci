@@ -6,6 +6,7 @@ session_start();
 
 $prijava = false;
 $seansaUbacena = false;
+$seansaIzmenjena = false;
 $psihoterapeut = $_SESSION['psihoterapeut'];
 
 if (!isset($psihoterapeut)) {
@@ -21,6 +22,11 @@ if (isset($_SESSION['prijava'])) {
 if (isset($_SESSION['seansaUbacena'])) {
     $seansaUbacena = true;
     unset($_SESSION['seansaUbacena']);
+}
+
+if (isset($_SESSION['seansaIzmenjena'])) {
+    $seansaIzmenjena = true;
+    unset($_SESSION['seansaIzmenjena']);
 }
 
 ?>
@@ -44,7 +50,7 @@ if (isset($_SESSION['seansaUbacena'])) {
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="navigacija-text">
+                    <div id="psihoterapeut" class="navigacija-text" psihoterapeutId="<?= $psihoterapeut->psihoterapeutId ?>">
                         <?= $psihoterapeut->ime ?> <?= $psihoterapeut->prezime ?>
                     </div>
                 </div>
@@ -66,6 +72,15 @@ if (isset($_SESSION['seansaUbacena'])) {
                             </button>
                         </div>
                     <?php endif; ?>
+
+                    <?php if ($seansaIzmenjena) : ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            "Seansa je uspesno izmenjena!"
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -76,31 +91,15 @@ if (isset($_SESSION['seansaUbacena'])) {
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Klijent</th>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Vreme</th>
+                        <th scope="col">Trajanje</th>
+                        <th scope="col">Akcije</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                <tbody id="seanseTableBody">
+                    <!-- js generated -->
                 </tbody>
             </table>
         </div>

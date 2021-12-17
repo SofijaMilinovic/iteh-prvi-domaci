@@ -24,8 +24,8 @@ class SeansaDAO {
         $this->psihoterapeutDAO = new PsihoterapeutDAO();
     }
 
-    public function vratiSveSeanse() {
-        $query = "SELECT * FROM $this->nazivTabele";
+    public function vratiSveSeanse($psihoterapeutId) {
+        $query = "SELECT * FROM $this->nazivTabele WHERE $this->kolonaPsihoterapeutId = $psihoterapeutId";
         $connection = DBBroker::getConnection();
         $rezultujucaTabela = $connection->query($query);
         $seanse = array();
@@ -54,8 +54,8 @@ class SeansaDAO {
         return $connection->query($query);
     }
 
-    public function obrisiSeansu($seansa) {
-        $query = "DELETE FROM $this->nazivTabele WHERE $this->kolonaSeansaId = $seansa->seansaId";
+    public function obrisiSeansu($seansaId) {
+        $query = "DELETE FROM $this->nazivTabele WHERE $this->kolonaSeansaId = $seansaId";
         $connection = DBBroker::getConnection();
         return $connection->query($query);
     }
