@@ -112,7 +112,7 @@ if (isset($_SESSION['seansaIzmenjena'])) {
                 <a class="btn btn-primary" href="./seansa.php">Ubaci novu seansu</a>
             </div>
             <div class="col-lg-3">
-                <button id="btnSortirajPoVremenu" class="btn btn-primary">Sortiraj po vremenu</button>
+                <button id="btnSortirajPoVremenu" poredak="rastuci" class="btn btn-primary">Sortiraj po vremenu rastuce</button>
             </div>
         </div>
     </div>

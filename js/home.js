@@ -3,6 +3,7 @@
 var $psihoterapeut = $("#psihoterapeut");
 var $seanseTableBody = $("#seanseTableBody");
 var $inputPretraziKlijent = $("#inputPretraziKlijent");
+var $btnSortirajPoVremenu = $("#btnSortirajPoVremenu");
 var sveSeanse = [];
 
 // *** ELEMENTI END ***
@@ -16,6 +17,39 @@ function filtrirajPoKlijentu() {
         return klijentImePrezime.includes(klijent);
     });
     populisiSeanse(filtriraneSeanse);
+}
+
+function sortirajPoVremenu() {
+    let seanse = sveSeanse.slice();
+    let poredak = $btnSortirajPoVremenu.attr("poredak");
+    for (let i = 0; i < seanse.length - 1; i++) {
+        for (let j = i + 1; j < seanse.length; j++) {
+            let prethodnikSati = seanse[i].vreme.substring(0, 2);
+            let prethodnikMinuti = seanse[i].vreme.substring(3);
+            let sledbenikSati = seanse[j].vreme.substring(0, 2);
+            let sledbenikMinuti = seanse[j].vreme.substring(3);
+
+            if (poredak == "rastuci") {
+                if ((prethodnikSati == sledbenikSati && prethodnikMinuti > sledbenikMinuti) || prethodnikSati > sledbenikSati) {
+                    let pom = seanse[i];
+                    seanse[i] = seanse[j];
+                    seanse[j] = pom;
+                }
+            } else {
+                if ((prethodnikSati == sledbenikSati && sledbenikMinuti > prethodnikMinuti) || sledbenikSati > prethodnikSati) {
+                    let pom = seanse[i];
+                    seanse[i] = seanse[j];
+                    seanse[j] = pom;
+                }
+            }
+        }
+    }
+    
+    populisiSeanse(seanse);
+    let noviPoredak = poredak == "rastuci" ? "opadajuci" : "rastuci";
+    $btnSortirajPoVremenu.attr("poredak", noviPoredak);
+    let noviTekst = noviPoredak == "rastuci" ? "rastuce" : "opadajuce";
+    $btnSortirajPoVremenu.html(`Sortiraj po vremenu ${noviTekst}`);
 }
 
 function ucitajSeanse() {
@@ -94,6 +128,7 @@ function postaviOsluskivaceNaSeanse() {
 // *** EXECUTE START ***
 
 $inputPretraziKlijent.on("input", filtrirajPoKlijentu);
+$btnSortirajPoVremenu.on("click", sortirajPoVremenu);
 ucitajSeanse();
 
 // *** EXECUTE END ***
