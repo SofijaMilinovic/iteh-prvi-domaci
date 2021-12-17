@@ -2,10 +2,21 @@
 
 var $psihoterapeut = $("#psihoterapeut");
 var $seanseTableBody = $("#seanseTableBody");
+var $inputPretraziKlijent = $("#inputPretraziKlijent");
+var sveSeanse = [];
 
 // *** ELEMENTI END ***
 
 // *** FUNKCIJE START ***
+
+function filtrirajPoKlijentu() {
+    var klijent = this.value;
+    filtriraneSeanse = sveSeanse.filter(seansa => {
+        const klijentImePrezime = `${seansa.klijent.ime} ${seansa.klijent.prezime}`;
+        return klijentImePrezime.includes(klijent);
+    });
+    populisiSeanse(filtriraneSeanse);
+}
 
 function ucitajSeanse() {
     const psihoterapeutId = $psihoterapeut.attr("psihoterapeutId");
@@ -17,14 +28,15 @@ function ucitajSeanse() {
         },
         success: seanseJSONString => {
             const seanseJSON = JSON.parse(seanseJSONString);
-            populisiSeanse(seanseJSON);
+            sveSeanse = seanseJSON.slice();
+            populisiSeanse(sveSeanse);
         }
     });
 }
 
-function populisiSeanse(seanseJSON) {
+function populisiSeanse(seanse) {
     var seanseTableBody = "";
-    for (const seansa of seanseJSON) {
+    for (const seansa of seanse) {
         seanseTableBody += vratiSeansuHtml(seansa);
     }
     $seanseTableBody.html(seanseTableBody);
@@ -59,17 +71,6 @@ function vratiSeansuHtml(seansa) {
 }
 
 function postaviOsluskivaceNaSeanse() {
-    $(".izmeniSeansu").on("click", event => {
-        // const seansaId = $(event.target).attr("seansaId");
-        // $.ajax({
-        //     type: "POST",
-        //     url: "seansa.php",
-        //     data: {
-        //         seansaId: seansaId
-        //     }
-        // });
-    });
-
     $(".obrisiSeansu").on("click", event => {
         event.preventDefault();
         const seansaId = $(event.target).attr("seansaId");
@@ -92,6 +93,7 @@ function postaviOsluskivaceNaSeanse() {
 
 // *** EXECUTE START ***
 
+$inputPretraziKlijent.on("input", filtrirajPoKlijentu);
 ucitajSeanse();
 
 // *** EXECUTE END ***

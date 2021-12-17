@@ -87,6 +87,10 @@ if (isset($_SESSION['seansaIzmenjena'])) {
     </div>
 
     <div class="container tabela">
+        <div class="row" style="margin-bottom: 30px;">
+            <label for="klijent">Pretrazi po klijentu</label>
+            <input id="inputPretraziKlijent" type="text" class="form-control">
+        </div>
         <div class="row">
             <table class="table">
                 <thead>
@@ -104,7 +108,12 @@ if (isset($_SESSION['seansaIzmenjena'])) {
             </table>
         </div>
         <div class="row">
-            <a class="btn btn-primary" href="./seansa.php">Ubaci novu seansu</a>
+            <div class="col-lg-3">
+                <a class="btn btn-primary" href="./seansa.php">Ubaci novu seansu</a>
+            </div>
+            <div class="col-lg-3">
+                <button id="btnSortirajPoVremenu" class="btn btn-primary">Sortiraj po vremenu</button>
+            </div>
         </div>
     </div>
 
