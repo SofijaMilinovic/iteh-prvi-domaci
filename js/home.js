@@ -14,7 +14,7 @@ function filtrirajPoKlijentu() {
     var klijent = this.value;
     filtriraneSeanse = sveSeanse.filter(seansa => {
         const klijentImePrezime = `${seansa.klijent.ime} ${seansa.klijent.prezime}`;
-        return klijentImePrezime.includes(klijent);
+        return klijentImePrezime.toLowerCase().includes(klijent.toLowerCase());
     });
     populisiSeanse(filtriraneSeanse);
 }
