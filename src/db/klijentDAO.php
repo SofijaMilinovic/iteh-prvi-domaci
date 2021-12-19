@@ -31,24 +31,16 @@ class KlijentDAO {
     public function pronadjiKlijenta($klijentJmbg) {
         $query = "SELECT * FROM $this->nazivTabele WHERE $this->kolonaJmbg = '$klijentJmbg'";
         $connection = DBBroker::getConnection();
-        if ($rezultujucaTabela = $connection->query($query)) {
-            $red = $rezultujucaTabela->fetch_array(1);
-            if ($red != null) {
-                return new Klijent(
-                    $red[$this->kolonaJmbg],
-                    $red[$this->kolonaIme],
-                    $red[$this->kolonaPrezime],
-                    $red[$this->kolonaDatumRodjenja]
-                );
-            }
+        $rezultujucaTabela = $connection->query($query);
+        while ($red = $rezultujucaTabela->fetch_array()) {
+            return new Klijent(
+                $red[$this->kolonaJmbg],
+                $red[$this->kolonaIme],
+                $red[$this->kolonaPrezime],
+                $red[$this->kolonaDatumRodjenja]
+            );
         }
         return null;
-    }
-
-    public function ubaciNovogKlijenta($klijent) {
-        $query = "INSERT INTO $this->nazivTabele ($this->kolonaJmbg, $this->kolonaIme, $this->kolonaPrezime, $this->kolonaDatumRodjenja) VALUES ('$klijent->jmbg', '$klijent->ime', '$klijent->prezime', '$klijent->datumRodjenja')";
-        $connection = DBBroker::getConnection();
-        return $connection->query($query);
     }
 
 }

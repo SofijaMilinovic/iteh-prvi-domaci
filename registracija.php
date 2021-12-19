@@ -16,22 +16,16 @@ if (isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['username']
     $psihoterapeut = new Psihoterapeut(null, $username, $password, $ime, $prezime);
     $psihoterapeutDAO = new PsihoterapeutDAO();
     $rezultat = $psihoterapeutDAO->ubaciNovogPsihoterapeuta($psihoterapeut);
-    $_SESSION['rezultat'] = $rezultat;
-}
-
-if (isset($_SESSION['rezultat'])) {
-    $rezultat = $_SESSION['rezultat'];
+    
     if ($rezultat == 1) {
         $_SESSION['registracija'] = true;
         header('Location: index.php');
-        unset($_SESSION['rezultat']);
         exit();
     } else if ($rezultat == -1) {
         $greska = "Neuspesno ste se registrovali, uneti username je zauzet!";
     } else {
         $greska = "Neuspesno ste se registrovali, greska u sistemu!";
     }
-    unset($_SESSION['rezultat']);
 }
 
 $_POST = array();
@@ -45,7 +39,6 @@ $_POST = array();
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
     <title>Index</title>
 
 </head>
@@ -112,6 +105,7 @@ $_POST = array();
 
                     <button id="btnRegister" class="btn btn-primary">Registruj se</button>
                 </form>
+
             </div>
         </div>
     </div>

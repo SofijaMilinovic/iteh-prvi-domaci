@@ -112,11 +112,9 @@ function postaviOsluskivaceNaSeanse() {
             type: "POST",
             url: "api/seanse.php",
             data: {
-                seansaId: seansaId,
-                method: "DELETE"
+                seansaId: seansaId
             },
-            success: response => {
-                console.log(response);
+            success: () => {
                 ucitajSeanse();
             }
         });

@@ -150,7 +150,7 @@ $greskaPrezimeAlert.hide();
 $greskaUsernameAlert.hide();
 $greskaPasswordAlert.hide();
 
-$btnRegister.on("click", (event) => {
+$btnRegister.on("click", event => {
     event.preventDefault();
     if (validateForm()) {
         $form.submit();

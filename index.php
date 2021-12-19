@@ -38,8 +38,7 @@ if (isset($_SESSION['registracija'])) {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-    <title>Index</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -68,9 +67,9 @@ if (isset($_SESSION['registracija'])) {
 
                 <form method="POST" action="#">
                     <label class="username">Korisnicko ime</label>
-                    <input type="text" name="username" class="form-control" required value="pera@gmail.com">
+                    <input type="text" name="username" class="form-control" required>
                     <label for="password">Lozinka</label>
-                    <input type="password" name="password" class="form-control" required value="Pera123">
+                    <input type="password" name="password" class="form-control" required>
                     <button type="submit" class="btn btn-primary" name="submit">Prijavi se</button>
                     <a class="btn btn-primary" name="register" href="./registracija.php">Registruj se</a>
                 </form>

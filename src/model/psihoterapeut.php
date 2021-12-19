@@ -8,11 +8,11 @@ class Psihoterapeut {
     public $ime;
     public $prezime;
     
-    public function __construct($psihoterapeutId=null, $username=null, $password=null, $ime=null, $prezime=null)
+    public function __construct($psihoterapeutId=null, $username=null, $ime=null, $prezime=null)
     {
         $this->psihoterapeutId = $psihoterapeutId;
         $this->username = $username;
-        $this->password = $password;
+        $this->password = "";
         $this->ime = $ime;
         $this->prezime = $prezime;
     }
