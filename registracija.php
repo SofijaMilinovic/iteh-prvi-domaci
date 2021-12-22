@@ -4,6 +4,8 @@ require_once "src/db/psihoterapeutDAO.php";
 
 session_start();
 
+unset($_SESSION['psihoterapeut']);
+
 $greska = null;
 
 if (isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['username']) && isset($_POST['password'])) {
