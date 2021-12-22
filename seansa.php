@@ -6,7 +6,16 @@ require_once "src/model/seansa.php";
 include_once "src/model/psihoterapeut.php";
 
 session_start();
-$psihoterapeut = $_SESSION['psihoterapeut'];
+
+$psihoterapeut = null;
+
+if (isset($_SESSION['psihoterapeut'])) {
+    $psihoterapeut = $_SESSION['psihoterapeut'];
+} else {
+    header('Location: index.php');
+    exit();
+};
+
 $greska = null;
 $mod = "ubaci";
 
@@ -88,7 +97,7 @@ $_POST = array();
     <div class="navigacija">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div id="psihoterapeut" class="navigacija-text" psihoterapeutId="<?= $psihoterapeut->psihoterapeutId ?>">
                         <?= $psihoterapeut->ime ?> <?= $psihoterapeut->prezime ?>
                     </div>

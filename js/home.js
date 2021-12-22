@@ -1,5 +1,7 @@
 // *** ELEMENTI START ***
 
+var $btnLogout = $("#btnLogout");
+
 var $psihoterapeut = $("#psihoterapeut");
 var $seanseTableBody = $("#seanseTableBody");
 var $inputPretraziKlijent = $("#inputPretraziKlijent");
@@ -125,6 +127,9 @@ function postaviOsluskivaceNaSeanse() {
 
 // *** EXECUTE START ***
 
+$btnLogout.on("click", () => {
+    window.location.href = "index.php";
+});
 $inputPretraziKlijent.on("input", filtrirajPoKlijentu);
 $btnSortirajPoVremenu.on("click", sortirajPoVremenu);
 ucitajSeanse();

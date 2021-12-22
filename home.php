@@ -4,15 +4,18 @@ include_once "src/model/psihoterapeut.php";
 
 session_start();
 
+$psihoterapeut = null;
+
+if (isset($_SESSION['psihoterapeut'])) {
+    $psihoterapeut = $_SESSION['psihoterapeut'];
+} else {
+    header('Location: index.php');
+    exit();
+};
+
 $prijava = false;
 $seansaUbacena = false;
 $seansaIzmenjena = false;
-$psihoterapeut = $_SESSION['psihoterapeut'];
-
-if (!isset($psihoterapeut)) {
-    header('Location: index.php');
-    exit();
-}
 
 if (isset($_SESSION['prijava'])) {
     $prijava = true;
@@ -49,12 +52,15 @@ if (isset($_SESSION['seansaIzmenjena'])) {
     <div class="navigacija">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div id="psihoterapeut" class="navigacija-text" psihoterapeutId="<?= $psihoterapeut->psihoterapeutId ?>">
                         <?= $psihoterapeut->ime ?> <?= $psihoterapeut->prezime ?>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-2">
+                    <button id="btnLogout" class="btn btn-primary">Odjavi se</button>
+                </div>
+                <div class="col-lg-5">
                     <?php if ($prijava) : ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             "Uspesno ste se prijavili!"
