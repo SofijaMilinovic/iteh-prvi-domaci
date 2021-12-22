@@ -13,7 +13,8 @@ if (isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['username']
     $ime = $_POST['ime'];
     $prezime = $_POST['prezime'];
 
-    $psihoterapeut = new Psihoterapeut(null, $username, $password, $ime, $prezime);
+    $psihoterapeut = new Psihoterapeut(null, $username, $ime, $prezime);
+    $psihoterapeut->password = $password;
     $psihoterapeutDAO = new PsihoterapeutDAO();
     $rezultat = $psihoterapeutDAO->ubaciNovogPsihoterapeuta($psihoterapeut);
     
