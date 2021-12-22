@@ -1,6 +1,6 @@
 /*
-SQLyog Community v13.1.6 (64 bit)
-MySQL - 8.0.23 : Database - iteh-prvi-domaci
+SQLyog Community v13.1.6 (64 bit) !
+MySQL - 8.0.23 : Database - iteh-prvi-domaci !
 *********************************************************************
 */
 
