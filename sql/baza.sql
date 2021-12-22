@@ -26,7 +26,7 @@ CREATE TABLE `klijent` (
   `prezime` varchar(255) NOT NULL,
   `datumRodjenja` date NOT NULL,
   PRIMARY KEY (`jmbg`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `klijent` */
 
@@ -45,7 +45,7 @@ CREATE TABLE `psihoterapeut` (
   `ime` varchar(255) NOT NULL,
   `prezime` varchar(255) NOT NULL,
   PRIMARY KEY (`psihoterapeutId`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `psihoterapeut` */
 
@@ -64,13 +64,13 @@ CREATE TABLE `seansa` (
   `trajanjeMin` int unsigned NOT NULL,
   `beleske` varchar(10000) NOT NULL,
   `psihoterapeutId` int unsigned NOT NULL,
-  `klijentJmbg` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `klijentJmbg` varchar(13) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`seansaId`),
   KEY `seansa_psihoterapeut_fk` (`psihoterapeutId`),
   KEY `seansa_klijent` (`klijentJmbg`),
   CONSTRAINT `seansa_klijent` FOREIGN KEY (`klijentJmbg`) REFERENCES `klijent` (`jmbg`),
   CONSTRAINT `seansa_psihoterapeut_fk` FOREIGN KEY (`psihoterapeutId`) REFERENCES `psihoterapeut` (`psihoterapeutId`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `seansa` */
 
