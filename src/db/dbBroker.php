@@ -4,7 +4,7 @@ class DBBroker {
 
     private static $host = "localhost";
     private static $username = "root";
-    private static $password = "root";
+    private static $password = "";
     private static $dbName = "iteh-prvi-domaci";
     private static $connection = null;
     
